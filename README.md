@@ -95,7 +95,7 @@ Este projeto foi desenvolvido como parte do **Trabalho 2 - Inteligência Artific
 | **Arquitetura** | Monolítica | Modular (7 funções) | ✅ Estruturada |
 | **Métricas** | Apenas Loss | Accuracy, F1, por classe | ✅ Completa |
 | **Visualização** | Nenhuma | Gráficos, Matriz, Curvas | ✅ Rica |
-| **Interface** | Inexistente | Responsiva e interativa | ✅ Profissional |
+| **Interface** | Simples  | Responsiva e interativa | ✅ Profissional |
 
 ### 🎨 Design da Interface
 - **Design responsivo** com CSS moderno
