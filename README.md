@@ -337,7 +337,7 @@ ecodetector-v2/
 
 ## 👨‍💻 Desenvolvedor
 
-**Nome**: [Nicolas França]  
+**Nome**: Nicolas França
 **Curso**: Sistemas de Informação  
 **Instituição**: Faculdade Antonio Meneghetti (AMF)  
 **Disciplina**: Inteligência Artificial 2025/01  
