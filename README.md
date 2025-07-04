@@ -1,6 +1,8 @@
 # 🌱 EcoDetector v2.0 — Classificação Inteligente de Resíduos
 
-![Matriz de Confusão](confusion_matrix.png)
+
+
+![tela inicial](tela_inicial.png)
 
 ## 📌 Sobre o Projeto
 
@@ -45,7 +47,19 @@ O **EcoDetector v2.0** é um sistema inteligente desenvolvido com foco em **clas
 | Interface             | Inexistente    | Responsiva e interativa  | ✅     |
 
 ---
+### 📊 Matriz de Confusão
 
+A matriz de confusão abaixo permite visualizar o desempenho do modelo em relação à classificação correta dos resíduos.
+
+- **Linhas** representam as **classes reais**
+- **Colunas** representam as **classes preditas pelo modelo**
+- A diagonal principal indica as classificações corretas
+- Valores fora da diagonal indicam erros de classificação
+
+Isso permite identificar se o modelo está confundindo tipos de resíduos, como plástico com papel, por exemplo.
+
+
+![Matriz de Confusão](confusion_matrix.png)
 ## 🔬 Resultados e Análise
 
 ### 📈 Desempenho do Modelo
