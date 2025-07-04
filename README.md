@@ -366,3 +366,8 @@ Este projeto foi desenvolvido para fins acadêmicos e educacionais.
 ---
 
 *⚡ Tecnologia + 🌱 Meio Ambiente = 🌍 Futuro Sustentável*
+
+
+![QR CODE](qr_code.png)
+
+
