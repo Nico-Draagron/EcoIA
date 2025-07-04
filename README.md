@@ -118,4 +118,18 @@ O EcoDetector mostra como é possível **aliar IA com impacto social**, promoven
 ---
 
 **🛠️ Desenvolvido em 2025 com foco em tecnologia + meio ambiente.**
+tabela_bibliotecas_md = """
+### 📚 Bibliotecas Utilizadas
+
+| Biblioteca    | Função Principal |
+|---------------|------------------|
+| PyTorch       | Criação, treino e ajuste da rede neural (EfficientNetB0) |
+| TorchVision   | Pré-processamento de imagens e carregamento de datasets |
+| Scikit-learn  | Avaliação do modelo: métricas como accuracy, F1 e matriz de confusão |
+| Matplotlib    | Geração de gráficos como curva de treinamento e distribuição |
+| Seaborn       | Visualização da matriz de confusão com estilo estatístico |
+| Pandas        | Manipulação de dados tabulares durante análises |
+| NumPy         | Operações matemáticas com arrays para pós-processamento |
+| Streamlit     | Criação da interface web interativa para o usuário final |
+"""
 
