@@ -759,7 +759,7 @@ def fazer_predicao(modelo, imagem):
 def criar_header():
     """Exibe apenas a imagem de fundo como banner"""
 
-    image_path = "exemplos/tela_inicial.png"
+    image_path = "img/tela_inicial.png"
 
     with open(image_path, "rb") as img_file:
         encoded = base64.b64encode(img_file.read()).decode()
