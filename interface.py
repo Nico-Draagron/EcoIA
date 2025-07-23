@@ -298,7 +298,34 @@ def load_css():
         border-color: #28a745;
         background: linear-gradient(135deg, rgba(248,255,248,0.95), rgba(240,249,240,0.95));
     }
-    
+    /* Cards de recompensa */
+/* Cards de recompensa */
+    .reward-card {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        border: 2px solid #6c757d;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .reward-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-color: #28a745;
+    }
+
+    .reward-card.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .reward-card.disabled:hover {
+        transform: none;
+        box-shadow: none;
+    }
     /* Animações de loading */
     .loading-spinner {
         border: 4px solid #f3f3f3;
@@ -452,31 +479,111 @@ MEDALHAS = {
     'guardian_vidro': {'nome': 'Guardião Vidro', 'emoji': '🍾', 'desc': '10 vidros'},
     'streak_7': {'nome': 'Sequência 7', 'emoji': '🔥', 'desc': '7 corretas seguidas'}
 }
-
+# Sistema de recompensas
+RECOMPENSAS = {
+    'roupas': {
+        'camiseta_eco': {
+            'nome': 'Camiseta EcoWarrior',
+            'emoji': '👕',
+            'custo': 150,
+            'desc': 'Camiseta sustentável feita com algodão orgânico',
+            'categoria': 'Roupas'
+        },
+        'mochila_reciclada': {
+            'nome': 'Mochila Eco',
+            'emoji': '🎒',
+            'custo': 300,
+            'desc': 'Mochila feita com materiais reciclados',
+            'categoria': 'Roupas'
+        },
+        'bone_eco': {
+            'nome': 'Boné Verde',
+            'emoji': '🧢',
+            'custo': 100,
+            'desc': 'Boné com tecido sustentável',
+            'categoria': 'Roupas'
+        }
+    },
+    'cesta_basica': {
+        'cesta_pequena': {
+            'nome': 'Cesta Básica P',
+            'emoji': '🥫',
+            'custo': 200,
+            'desc': 'Cesta com 10 itens essenciais',
+            'categoria': 'Alimentação'
+        },
+        'cesta_media': {
+            'nome': 'Cesta Básica M',
+            'emoji': '🛒',
+            'custo': 350,
+            'desc': 'Cesta com 20 itens variados',
+            'categoria': 'Alimentação'
+        },
+        'cesta_grande': {
+            'nome': 'Cesta Básica G',
+            'emoji': '📦',
+            'custo': 500,
+            'desc': 'Cesta completa para família',
+            'categoria': 'Alimentação'
+        }
+    },
+    'material_escolar': {
+        'kit_basico': {
+            'nome': 'Kit Escolar Básico',
+            'emoji': '✏️',
+            'custo': 80,
+            'desc': 'Lápis, canetas e borracha ecológicos',
+            'categoria': 'Escolar'
+        },
+        'caderno_reciclado': {
+            'nome': 'Caderno Reciclado',
+            'emoji': '📓',
+            'custo': 50,
+            'desc': 'Caderno 200 folhas de papel reciclado',
+            'categoria': 'Escolar'
+        },
+        'kit_completo': {
+            'nome': 'Kit Escolar Completo',
+            'emoji': '🎓',
+            'custo': 250,
+            'desc': 'Material completo para o ano letivo',
+            'categoria': 'Escolar'
+        }
+    }
+}
 # Pontos de coleta (dados simplificados do RS)
 PONTOS_COLETA = {
     'cardboard': [
-        {'nome': 'Ecoponto Centro POA', 'lat': -30.0346, 'lng': -51.2177, 'cidade': 'Porto Alegre'},
-        {'nome': 'Central Caxias', 'lat': -29.1634, 'lng': -51.1797, 'cidade': 'Caxias do Sul'},
-        {'nome': 'Ecoponto Canoas', 'lat': -29.9177, 'lng': -51.1794, 'cidade': 'Canoas'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0346, 'lon': -51.2177, 'nome': 'Ecoponto Centro', 'endereco': 'Av. Borges de Medeiros, 1501', 'horario': '8h-17h', 'telefone': '(51) 3289-6000'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0568, 'lon': -51.1733, 'nome': 'Cooperativa COOPERTINGA', 'endereco': 'Rua Santana, 1200', 'horario': '7h-16h', 'telefone': '(51) 3225-1234'},
+        {'cidade': 'Caxias do Sul', 'lat': -29.1634, 'lon': -51.1797, 'nome': 'Central de Reciclagem Caxias', 'endereco': 'Rua Ludovico Cavinato, 1555', 'horario': '8h-17h', 'telefone': '(54) 3290-5500'},
+        {'cidade': 'Pelotas', 'lat': -31.7654, 'lon': -52.3376, 'nome': 'Ecoponto Pelotas Sul', 'endereco': 'Av. Bento Gonçalves, 3344', 'horario': '8h-16h', 'telefone': '(53) 3227-8800'},
+        {'cidade': 'Santa Maria', 'lat': -29.6842, 'lon': -53.8069, 'nome': 'COOMARSUL', 'endereco': 'Rua Appel, 1456', 'horario': '7h30-17h', 'telefone': '(55) 3212-9900'},
+        {'cidade': 'Canoas', 'lat': -29.9177, 'lon': -51.1794, 'nome': 'Ecoponto Canoas', 'endereco': 'Av. Guilherme Schell, 5340', 'horario': '8h-17h', 'telefone': '(51) 3464-7700'},
+        {'cidade': 'Novo Hamburgo', 'lat': -29.6783, 'lon': -51.1309, 'nome': 'Cooperativa COOPERTEC', 'endereco': 'Rua Gen. Daltro Filho, 1200', 'horario': '8h-16h', 'telefone': '(51) 3525-2200'},
+        {'cidade': 'Passo Fundo', 'lat': -28.2636, 'lon': -52.4091, 'nome': 'COOTRAVIPA', 'endereco': 'Rua Uruguai, 2567', 'horario': '7h-17h', 'telefone': '(54) 3311-4400'}
     ],
     'plastic': [
-        {'nome': 'Ecoponto Centro POA', 'lat': -30.0346, 'lng': -51.2177, 'cidade': 'Porto Alegre'},
-        {'nome': 'PET Recicla POA', 'lat': -30.1059, 'lng': -51.2019, 'cidade': 'Porto Alegre'},
-        {'nome': 'PlásticoVerde Caxias', 'lat': -29.1877, 'lng': -51.1589, 'cidade': 'Caxias do Sul'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0346, 'lon': -51.2177, 'nome': 'Ecoponto Centro', 'endereco': 'Av. Borges de Medeiros, 1501', 'horario': '8h-17h', 'telefone': '(51) 3289-6000'},
+        {'cidade': 'Porto Alegre', 'lat': -30.1059, 'lon': -51.2019, 'nome': 'PET Recicla POA', 'endereco': 'Rua Cristóvão Colombo, 545', 'horario': '8h-17h', 'telefone': '(51) 3330-1100'},
+        {'cidade': 'Caxias do Sul', 'lat': -29.1877, 'lon': -51.1589, 'nome': 'PlásticoVerde Caxias', 'endereco': 'Av. Júlio de Castilhos, 2890', 'horario': '8h-16h', 'telefone': '(54) 3223-3300'},
+        # Adicione mais pontos conforme necessário
     ],
     'glass': [
-        {'nome': 'Ecoponto Centro POA', 'lat': -30.0346, 'lng': -51.2177, 'cidade': 'Porto Alegre'},
-        {'nome': 'VidroLimpo POA', 'lat': -30.0275, 'lng': -51.2287, 'cidade': 'Porto Alegre'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0346, 'lon': -51.2177, 'nome': 'Ecoponto Centro', 'endereco': 'Av. Borges de Medeiros, 1501', 'horario': '8h-17h', 'telefone': '(51) 3289-6000'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0275, 'lon': -51.2287, 'nome': 'VidroLimpo POA', 'endereco': 'Rua Riachuelo, 1333', 'horario': '8h-17h', 'telefone': '(51) 3286-7700'},
+        # Adicione mais pontos conforme necessário
     ],
     'metal': [
-        {'nome': 'Ecoponto Centro POA', 'lat': -30.0346, 'lng': -51.2177, 'cidade': 'Porto Alegre'},
-        {'nome': 'MetalRecicla POA', 'lat': -30.0194, 'lng': -51.2189, 'cidade': 'Porto Alegre'},
-        {'nome': 'FerroVelho Caxias', 'lat': -29.1456, 'lng': -51.1945, 'cidade': 'Caxias do Sul'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0346, 'lon': -51.2177, 'nome': 'Ecoponto Centro', 'endereco': 'Av. Borges de Medeiros, 1501', 'horario': '8h-17h', 'telefone': '(51) 3289-6000'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0194, 'lon': -51.2189, 'nome': 'MetalRecicla POA', 'endereco': 'Av. Ipiranga, 6681', 'horario': '7h-17h', 'telefone': '(51) 3320-5500'},
+        {'cidade': 'Caxias do Sul', 'lat': -29.1456, 'lon': -51.1945, 'nome': 'FerroVelho Caxias', 'endereco': 'Rua Sinimbu, 1890', 'horario': '7h30-17h30', 'telefone': '(54) 3221-8800'},
+        # Adicione mais pontos conforme necessário
     ],
     'paper': [
-        {'nome': 'Ecoponto Centro POA', 'lat': -30.0346, 'lng': -51.2177, 'cidade': 'Porto Alegre'},
-        {'nome': 'Central Caxias', 'lat': -29.1634, 'lng': -51.1797, 'cidade': 'Caxias do Sul'},
+        {'cidade': 'Porto Alegre', 'lat': -30.0346, 'lon': -51.2177, 'nome': 'Ecoponto Centro', 'endereco': 'Av. Borges de Medeiros, 1501', 'horario': '8h-17h', 'telefone': '(51) 3289-6000'},
+        {'cidade': 'Caxias do Sul', 'lat': -29.1634, 'lon': -51.1797, 'nome': 'Central de Reciclagem Caxias', 'endereco': 'Rua Ludovico Cavinato, 1555', 'horario': '8h-17h', 'telefone': '(54) 3290-5500'},
+        # Adicione mais pontos conforme necessário
     ]
 }
 
@@ -497,9 +604,9 @@ def inicializar_sessao():
             'streak_atual': 0,
             'nivel_usuario': 1,
             'xp_total': 0,
-            'data_ultimo_acesso': datetime.now().isoformat()
+            'data_ultimo_acesso': datetime.now().isoformat(),
+            'recompensas_resgatadas': []
         }
-    
     if 'current_page' not in st.session_state:
         st.session_state.current_page = 'Detector'
 
@@ -559,6 +666,22 @@ def verificar_medalhas():
         user_data['medalhas_conquistadas'].extend(novas_medalhas)
     
     return novas_medalhas
+def resgatar_recompensa(recompensa_id: str, categoria: str):
+    """Resgata uma recompensa usando EcoMoedas"""
+    user_data = st.session_state.user_data
+    recompensa = RECOMPENSAS[categoria][recompensa_id]
+    
+    if user_data['ecomoedas_total'] >= recompensa['custo']:
+        user_data['ecomoedas_total'] -= recompensa['custo']
+        user_data['recompensas_resgatadas'].append({
+            'id': recompensa_id,
+            'nome': recompensa['nome'],
+            'categoria': categoria,
+            'timestamp': datetime.now().isoformat(),
+            'custo': recompensa['custo']
+        })
+        return True
+    return False
 
 # ================================================
 # 🤖 FUNÇÕES DO MODELO
@@ -724,48 +847,539 @@ def mostrar_grafico_probabilidades(probabilidades):
     
     return fig
 
-def criar_mapa_pontos_coleta(material):
-    """Cria mapa com pontos de coleta"""
-    pontos = PONTOS_COLETA.get(material, [])
+
+def criar_mapa_interativo(material):
+    """Cria mapa interativo melhorado com múltiplas camadas e visualizações"""
     
+    pontos = PONTOS_COLETA.get(material, [])
     if not pontos:
         return None
     
-    # Preparar dados
-    map_data = pd.DataFrame(pontos)
+    # Preparar dados para o mapa
+    df_pontos = pd.DataFrame(pontos)
     
-    # Configurar camada
-    layer = pdk.Layer(
+    # Adicionar cores e informações extras
+    material_info = CLASS_METADATA.get(material, {})
+    cor_rgb = hex_to_rgb(material_info.get('color', '#3e8e41'))
+    cor_rgb.append(200)  # Alpha
+    
+    df_pontos['color'] = [cor_rgb] * len(df_pontos)
+    df_pontos['radius'] = 300
+    df_pontos['elevation'] = 50
+    
+    # Criar múltiplas camadas
+    layers = []
+    
+    # 1. Camada de pontos principais (ScatterplotLayer)
+    scatter_layer = pdk.Layer(
         'ScatterplotLayer',
-        data=map_data,
-        get_position='[lng, lat]',
-        get_color='[46, 142, 65, 200]',
-        get_radius=500,
+        data=df_pontos,
+        get_position='[lon, lat]',
+        get_color='color',
+        get_radius='radius',
         radius_scale=1,
+        radius_min_pixels=10,
+        radius_max_pixels=60,
         pickable=True,
-        filled=True
+        opacity=0.8,
+        stroked=True,
+        filled=True,
+        line_width_min_pixels=3,
+        get_line_color=[255, 255, 255, 255]
     )
+    layers.append(scatter_layer)
     
-    # Vista inicial
+    # 2. Camada de ícones (IconLayer)
+    df_pontos['icon_data'] = [{
+        'url': 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+        'width': 128,
+        'height': 128,
+        'anchorY': 128,
+        'mask': True
+    }] * len(df_pontos)
+    
+    icon_layer = pdk.Layer(
+        'IconLayer',
+        data=df_pontos,
+        get_icon='icon_data',
+        get_position='[lon, lat]',
+        get_size=4,
+        size_scale=15,
+        pickable=True
+    )
+    layers.append(icon_layer)
+    
+    # 3. Camada de texto (TextLayer) para nomes das cidades
+    df_cidades = df_pontos.groupby('cidade').first().reset_index()
+    text_layer = pdk.Layer(
+        'TextLayer',
+        data=df_cidades,
+        get_position='[lon, lat]',
+        get_text='cidade',
+        get_size=16,
+        get_color=[0, 0, 0, 200],
+        get_angle=0,
+        get_text_anchor="'middle'",
+        get_alignment_baseline="'bottom'",
+        billboard=False,
+        pickable=True
+    )
+    layers.append(text_layer)
+    
+    # 4. Camada de calor (HeatmapLayer) para densidade
+    heatmap_layer = pdk.Layer(
+        'HeatmapLayer',
+        data=df_pontos,
+        get_position='[lon, lat]',
+        get_weight=1,
+        radius_pixels=60,
+        opacity=0.3,
+        threshold=0.03
+    )
+    layers.append(heatmap_layer)
+    
+    # Configurar vista inicial centrada no RS
     view_state = pdk.ViewState(
-        latitude=-29.5,
-        longitude=-52.0,
-        zoom=7,
-        pitch=0
+        latitude=-30.0,
+        longitude=-53.0,
+        zoom=6.5,
+        pitch=30,
+        bearing=0
     )
     
-    # Tooltip
+    # Tooltip HTML melhorado
+    tooltip_html = """
+    <div style="font-family: 'Inter', sans-serif; background: rgba(255,255,255,0.98); 
+         padding: 16px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+         max-width: 350px; border: 2px solid {cor};">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 12px; 
+                    border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">
+            <span style="font-size: 2rem; margin-right: 10px;">{emoji}</span>
+            <div>
+                <h3 style="margin: 0; color: #2d5a2d; font-size: 1.2rem;">{nome}</h3>
+                <p style="margin: 0; color: #666; font-size: 0.9rem;">{cidade}, RS</p>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 8px;">
+            <strong style="color: #3e8e41;">📍 Endereço:</strong>
+            <p style="margin: 2px 0 0 20px; color: #555;">{endereco}</p>
+        </div>
+        
+        <div style="margin-bottom: 8px;">
+            <strong style="color: #3e8e41;">🕐 Horário:</strong>
+            <span style="color: #555; margin-left: 5px;">{horario}</span>
+        </div>
+        
+        <div style="margin-bottom: 8px;">
+            <strong style="color: #3e8e41;">📞 Telefone:</strong>
+            <span style="color: #555; margin-left: 5px;">{telefone}</span>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #e8f5e8, #d4f4d4); 
+                    padding: 8px 12px; border-radius: 8px; margin-top: 12px; 
+                    text-align: center;">
+            <small style="color: #2d5a2d; font-weight: 600;">
+                ♻️ Aceita: {material_nome}
+            </small>
+        </div>
+        
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd;">
+            <small style="color: #888;">
+                📅 Atualizado em: {data_atual}
+            </small>
+        </div>
+    </div>
+    """.format(
+        cor=material_info.get('color', '#3e8e41'),
+        emoji=material_info.get('emoji', '♻️'),
+        nome='{nome}',
+        cidade='{cidade}',
+        endereco='{endereco}',
+        horario='{horario}',
+        telefone='{telefone}',
+        material_nome=material_info.get('name', material),
+        data_atual=datetime.now().strftime('%d/%m/%Y')
+    )
+    
     tooltip = {
-        'html': '<b>{nome}</b><br/>📍 {cidade}',
-        'style': {'backgroundColor': 'white', 'color': 'black'}
+        'html': tooltip_html,
+        'style': {
+            'backgroundColor': 'transparent',
+            'color': 'black'
+        }
     }
     
-    return pdk.Deck(
-        layers=[layer],
+    # Criar deck com configurações melhoradas
+    deck = pdk.Deck(
+        layers=layers,
         initial_view_state=view_state,
         tooltip=tooltip,
-        map_style='mapbox://styles/mapbox/light-v9'
+        map_style='mapbox://styles/mapbox/light-v10',
+        map_provider='mapbox'
     )
+    
+    return deck
+
+def criar_grafico_estatisticas(material):
+    pontos = PONTOS_COLETA.get(material, [])
+    if not pontos:
+        return None
+
+    df = pd.DataFrame(pontos)
+    cidades = df['cidade'].value_counts().head(10)
+    
+    fig = go.Figure(data=[
+        go.Bar(
+            x=cidades.index,
+            y=cidades.values,
+            marker_color=CLASS_METADATA.get(material, {}).get('color', '#3e8e41')
+        )
+    ])
+    fig.update_layout(
+        title="Top Cidades com Pontos de Coleta",
+        xaxis_title="Cidade",
+        yaxis_title="Quantidade de Pontos",
+        template="simple_white"
+    )
+    return fig
+def hex_to_rgb(hex_color):
+    hex_color = hex_color.lstrip('#')
+    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+
+def criar_mapa_interativo(material, mostrar_calor=True, mostrar_nomes=True):
+    """Cria visualização interativa com pontos, calor e nomes"""
+    
+    pontos = PONTOS_COLETA.get(material, [])
+    if not pontos:
+        return None
+
+    df = pd.DataFrame(pontos)
+    if df.empty or 'lat' not in df.columns or 'lon' not in df.columns:
+        return None
+
+    cor_rgb = hex_to_rgb(CLASS_METADATA.get(material, {}).get('color', '#3e8e41'))
+
+    # Camada de pontos com cor personalizada
+    layer_pontos = pdk.Layer(
+        "ScatterplotLayer",
+        data=df,
+        get_position="[lon, lat]",
+        get_radius=5000,
+        get_fill_color=list(cor_rgb) + [160],
+        pickable=True,
+        radius_min_pixels=5,
+        radius_max_pixels=15,
+    )
+
+    layers = [layer_pontos]
+
+    if mostrar_calor:
+        layer_calor = pdk.Layer(
+            "HeatmapLayer",
+            data=df,
+            get_position="[lon, lat]",
+            aggregation=pdk.types.String("MEAN"),
+            get_weight=1
+        )
+        layers.append(layer_calor)
+
+    if mostrar_nomes:
+        layer_texto = pdk.Layer(
+            "TextLayer",
+            data=df,
+            get_position="[lon, lat]",
+            get_text="cidade",
+            get_size=16,
+            get_color=[225, 225, 225],
+            get_angle=0,
+            get_alignment_baseline="'bottom'",
+        )
+        layers.append(layer_texto)
+
+    view_state = pdk.ViewState(
+        latitude=df["lat"].mean(),
+        longitude=df["lon"].mean(),
+        zoom=6,
+        pitch=0,
+    )
+
+    return pdk.Deck(
+        layers=layers,
+        initial_view_state=view_state,
+        tooltip={"text": "{nome} - {cidade}"}
+    )
+def mostrar_secao_mapa_melhorada(material):
+    """Mostra seção do mapa com interface melhorada"""
+    
+    st.markdown("### 🗺️ Pontos de Coleta no Rio Grande do Sul")
+    
+    # Informações do material
+    material_info = CLASS_METADATA.get(material, {})
+    material_nome = material_info.get('name', material.title())
+    material_emoji = material_info.get('emoji', '♻️')
+    
+    # Header com gradiente
+    st.markdown(f"""
+    <div style="background: linear-gradient(135deg, #e8f5e8, #d4f4d4); 
+                padding: 2rem; border-radius: 20px; margin-bottom: 2rem; 
+                text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h2 style="margin: 0; color: #2d5a2d;">
+            {material_emoji} Encontre onde descartar {material_nome}
+        </h2>
+        <p style="margin: 0.5rem 0 0 0; color: #3e8e41;">
+            Localize os pontos de coleta mais próximos no Rio Grande do Sul
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Verificar pontos disponíveis
+    pontos = PONTOS_COLETA.get(material, [])
+    
+    if not pontos:
+        st.warning(f"⚠️ Ainda não temos pontos de coleta para {material_nome} cadastrados.")
+        return
+    
+    # Métricas em cards
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.markdown(f"""
+        <div style="background: white; padding: 1.5rem; border-radius: 15px; 
+                    text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0; color: #3e8e41;">📍 {len(pontos)}</h3>
+            <p style="margin: 0.5rem 0 0 0; color: #666;">Pontos Disponíveis</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        cidades_unicas = len(set(p['cidade'] for p in pontos))
+        st.markdown(f"""
+        <div style="background: white; padding: 1.5rem; border-radius: 15px; 
+                    text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0; color: #3e8e41;">🏙️ {cidades_unicas}</h3>
+            <p style="margin: 0.5rem 0 0 0; color: #666;">Cidades Atendidas</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown(f"""
+        <div style="background: white; padding: 1.5rem; border-radius: 15px; 
+                    text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0; color: #3e8e41;">🌍 RS</h3>
+            <p style="margin: 0.5rem 0 0 0; color: #666;">Estado</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col4:
+        st.markdown(f"""
+        <div style="background: white; padding: 1.5rem; border-radius: 15px; 
+                    text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0; color: #3e8e41;">{material_emoji}</h3>
+            <p style="margin: 0.5rem 0 0 0; color: #666;">{material_nome}</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Tabs para diferentes visualizações
+    tab1, tab2, tab3 = st.tabs(["🗺️ Mapa Interativo", "📊 Estatísticas", "📋 Lista Detalhada"])
+    
+    with tab1:
+        # Opções de visualização do mapa
+        col_opt1, col_opt2 = st.columns([3, 1])
+        
+        with col_opt2:
+            vista_3d = st.checkbox("🎮 Vista 3D", value=False)
+            mostrar_calor = st.checkbox("🔥 Mapa de Calor", value=True)
+            mostrar_nomes = st.checkbox("🏷️ Nomes das Cidades", value=True)
+        
+        # Criar e mostrar mapa
+        try:
+            # Chama a função criando o mapa com base nas opções selecionadas pelo usuário
+            deck = criar_mapa_interativo(
+                material=material,
+                mostrar_calor=mostrar_calor,
+                mostrar_nomes=mostrar_nomes
+            )
+            
+            if deck:
+                # Aplica rotação e inclinação se a vista 3D estiver ativada
+                if vista_3d:
+                    deck.initial_view_state.pitch = 45
+                    deck.initial_view_state.bearing = -15
+
+                # Exibe o mapa na interface Streamlit
+                st.pydeck_chart(deck, use_container_width=True)
+
+                # Instruções visuais para o usuário
+                st.info("""
+                💡 **Dicas de Navegação:**
+                - 🖱️ **Clique e arraste** para mover o mapa  
+                - 🔍 **Scroll** para zoom in/out  
+                - 📍 **Clique nos pontos** para ver detalhes  
+                - 🎮 **Segure Ctrl + arraste** para rotacionar (modo 3D)
+                """)
+            else:
+                st.error("❌ Erro ao carregar o mapa")
+        except Exception as e:
+            st.error(f"❌ Erro ao criar o mapa: {str(e)}")
+    
+    with tab2:
+        # Mostrar gráfico de estatísticas
+        fig = criar_grafico_estatisticas(material)
+        if fig:
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # Estatísticas adicionais
+        st.markdown("#### 📈 Análise de Cobertura")
+        
+        # Criar DataFrame para análise
+        df_pontos = pd.DataFrame(pontos)
+        
+        col_stat1, col_stat2 = st.columns(2)
+        
+        with col_stat1:
+            # Pontos por cidade
+            pontos_por_cidade = df_pontos['cidade'].value_counts()
+            st.markdown("**🏙️ Top Cidades com Mais Pontos:**")
+            for cidade, count in pontos_por_cidade.head(3).items():
+                st.markdown(f"• {cidade}: {count} ponto(s)")
+        
+        with col_stat2:
+            # Horários mais comuns
+            st.markdown("**🕐 Horários de Funcionamento:**")
+            horarios = df_pontos['horario'].value_counts()
+            for horario, count in horarios.head(3).items():
+                st.markdown(f"• {horario}: {count} local(is)")
+    
+    with tab3:
+        # Filtros
+        st.markdown("#### 🔍 Filtrar Pontos")
+        
+        col_filter1, col_filter2 = st.columns(2)
+        
+        with col_filter1:
+            cidades_disponiveis = sorted(set(p['cidade'] for p in pontos))
+            cidade_filtro = st.multiselect(
+                "Selecione as cidades:",
+                options=cidades_disponiveis,
+                default=cidades_disponiveis
+            )
+        
+        with col_filter2:
+            busca_nome = st.text_input("🔎 Buscar por nome:", "")
+        
+        # Filtrar pontos
+        pontos_filtrados = [
+            p for p in pontos 
+            if p['cidade'] in cidade_filtro and 
+            (busca_nome.lower() in p['nome'].lower() if busca_nome else True)
+        ]
+        
+        # Agrupar por cidade
+        pontos_por_cidade = {}
+        for ponto in pontos_filtrados:
+            cidade = ponto['cidade']
+            if cidade not in pontos_por_cidade:
+                pontos_por_cidade[cidade] = []
+            pontos_por_cidade[cidade].append(ponto)
+        
+        # Mostrar pontos agrupados
+        st.markdown(f"#### 📍 {len(pontos_filtrados)} Pontos Encontrados")
+        
+        for cidade, pontos_cidade in sorted(pontos_por_cidade.items()):
+            with st.expander(f"🏙️ **{cidade}** ({len(pontos_cidade)} pontos)", expanded=True):
+                for i, ponto in enumerate(pontos_cidade):
+                    # Card para cada ponto
+                    st.markdown(f"""
+                    <div style="background: linear-gradient(135deg, #ffffff, #f8fff8); 
+                                padding: 1.5rem; margin: 1rem 0; border-radius: 15px; 
+                                border-left: 5px solid {material_info.get('color', '#3e8e41')}; 
+                                box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: #2d5a2d;">
+                                    {material_emoji} {ponto['nome']}
+                                </h4>
+                                <p style="margin: 0.3rem 0; color: #555;">
+                                    <strong>📍 Endereço:</strong> {ponto['endereco']}
+                                </p>
+                                <p style="margin: 0.3rem 0; color: #555;">
+                                    <strong>🕐 Horário:</strong> {ponto['horario']}
+                                </p>
+                                <p style="margin: 0.3rem 0; color: #555;">
+                                    <strong>📞 Telefone:</strong> {ponto.get('telefone', 'Não disponível')}
+                                </p>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem;">
+                                <a href="https://www.google.com/maps/search/?api=1&query={ponto['lat']},{ponto['lon']}" 
+                                   target="_blank" 
+                                   style="background: linear-gradient(45deg, #3e8e41, #28a745); 
+                                          color: white; padding: 0.5rem 1rem; border-radius: 8px; 
+                                          text-decoration: none; display: inline-block; 
+                                          transition: all 0.3s ease;">
+                                    🗺️ Ver no Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+    
+    # Dicas e informações importantes
+    st.markdown("---")
+    st.markdown("### 💡 Informações Importantes")
+    
+    col_info1, col_info2 = st.columns(2)
+    
+    with col_info1:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); 
+                    padding: 1.5rem; border-radius: 15px; border-left: 4px solid #2196f3;">
+            <h4 style="margin: 0 0 0.5rem 0; color: #1565c0;">📞 Antes de Ir:</h4>
+            <ul style="margin: 0; padding-left: 1.5rem;">
+                <li>Ligue para confirmar horários</li>
+                <li>Verifique se aceitam o material</li>
+                <li>Pergunte sobre quantidade máxima</li>
+                <li>Confirme se precisa de cadastro</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_info2:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); 
+                    padding: 1.5rem; border-radius: 15px; border-left: 4px solid #ff9800;">
+            <h4 style="margin: 0 0 0.5rem 0; color: #e65100;">📦 Preparação do Material:</h4>
+            <ul style="margin: 0; padding-left: 1.5rem;">
+                <li>Limpe e seque o material</li>
+                <li>Remova rótulos se possível</li>
+                <li>Separe por tipo/categoria</li>
+                <li>Embale de forma segura</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+def criar_grafico_estatisticas(material):
+    pontos = PONTOS_COLETA.get(material, [])
+    if not pontos:
+        return None
+
+    df = pd.DataFrame(pontos)
+    cidades = df['cidade'].value_counts().head(10)
+    
+    fig = go.Figure(data=[
+        go.Bar(
+            x=cidades.index,
+            y=cidades.values,
+            marker_color=CLASS_METADATA.get(material, {}).get('color', '#3e8e41')
+        )
+    ])
+    fig.update_layout(
+        title="Top Cidades com Pontos de Coleta",
+        xaxis_title="Cidade",
+        yaxis_title="Quantidade de Pontos",
+        template="simple_white"
+    )
+    return fig
 
 def mostrar_alertas_medalhas(novas_medalhas):
     """Mostra alertas de novas medalhas"""
@@ -786,6 +1400,7 @@ def mostrar_sidebar():
             'Dashboard': '📊 Dashboard',
             'Ranking': '🏆 Ranking',
             'Mapa': '🗺️ Pontos de Coleta',
+            'Loja': '🎁 RECOMPENSAS',
             'Sobre': 'ℹ️ Sobre'
         }
         
@@ -815,6 +1430,7 @@ def mostrar_sidebar():
         - 🎯 Detecções: {user_data['deteccoes_realizadas']}
         - 🏆 Medalhas: {len(user_data['medalhas_conquistadas'])}
         - 🌍 CO₂ Evitado: {user_data['impacto_total']['co2']:.1f}kg
+        - 🎁 Recompensas: {len(user_data['recompensas_resgatadas'])} 
         """)
         
         st.markdown("---")
@@ -845,7 +1461,8 @@ def mostrar_sidebar():
                 'streak_atual': 0,
                 'nivel_usuario': 1,
                 'xp_total': 0,
-                'data_ultimo_acesso': datetime.now().isoformat()
+                'data_ultimo_acesso': datetime.now().isoformat(),
+                'recompensas_resgatadas': []
             }
             st.success("✅ Dados resetados!")
             st.rerun()
@@ -1183,6 +1800,144 @@ def pagina_ranking():
         st.progress(progresso)
         st.markdown(f"**{medalha}**: {atual}/{meta} ({progresso*100:.1f}%)")
 
+def pagina_recompensas():
+    """Página de recompensas"""
+    st.markdown("## 🎁 Loja de Recompensas")
+    
+    user_data = st.session_state.user_data
+    
+    # Mostrar saldo
+    st.markdown(f"""
+    <div class="ecomoeda-card">
+        <h2>🪙 Saldo: {user_data['ecomoedas_total']} EcoMoedas</h2>
+        <p>Use suas EcoMoedas para resgatar produtos sustentáveis!</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Tabs para categorias
+    tab1, tab2, tab3, tab4 = st.tabs(["👕 Roupas", "🛒 Cesta Básica", "📚 Material Escolar", "📜 Histórico"])
+    
+    with tab1:
+        st.markdown("### 👕 Roupas Sustentáveis")
+        cols = st.columns(3)
+        
+        for i, (item_id, item) in enumerate(RECOMPENSAS['roupas'].items()):
+            with cols[i % 3]:
+                pode_resgatar = user_data['ecomoedas_total'] >= item['custo']
+                
+                st.markdown(f"""
+                <div class="reward-card {'disabled' if not pode_resgatar else ''}">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">{item['emoji']}</div>
+                    <h4>{item['nome']}</h4>
+                    <p>{item['desc']}</p>
+                    <h3>🪙 {item['custo']} EcoMoedas</h3>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"Resgatar {item['nome']}", key=f"roupas_{item_id}", disabled=not pode_resgatar):
+                    if resgatar_recompensa(item_id, 'roupas'):
+                        st.success(f"✅ {item['nome']} resgatado com sucesso!")
+                        st.balloons()
+                        time.sleep(1)
+                        st.rerun()
+    
+    with tab2:
+        st.markdown("### 🛒 Cestas Básicas")
+        cols = st.columns(3)
+        
+        for i, (item_id, item) in enumerate(RECOMPENSAS['cesta_basica'].items()):
+            with cols[i % 3]:
+                pode_resgatar = user_data['ecomoedas_total'] >= item['custo']
+                
+                st.markdown(f"""
+                <div class="reward-card {'disabled' if not pode_resgatar else ''}">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">{item['emoji']}</div>
+                    <h4>{item['nome']}</h4>
+                    <p>{item['desc']}</p>
+                    <h3>🪙 {item['custo']} EcoMoedas</h3>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"Resgatar {item['nome']}", key=f"cesta_{item_id}", disabled=not pode_resgatar):
+                    if resgatar_recompensa(item_id, 'cesta_basica'):
+                        st.success(f"✅ {item['nome']} resgatado com sucesso!")
+                        st.balloons()
+                        time.sleep(1)
+                        st.rerun()
+    
+    with tab3:
+        st.markdown("### 📚 Material Escolar")
+        cols = st.columns(3)
+        
+        for i, (item_id, item) in enumerate(RECOMPENSAS['material_escolar'].items()):
+            with cols[i % 3]:
+                pode_resgatar = user_data['ecomoedas_total'] >= item['custo']
+                
+                st.markdown(f"""
+                <div class="reward-card {'disabled' if not pode_resgatar else ''}">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">{item['emoji']}</div>
+                    <h4>{item['nome']}</h4>
+                    <p>{item['desc']}</p>
+                    <h3>🪙 {item['custo']} EcoMoedas</h3>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"Resgatar {item['nome']}", key=f"material_{item_id}", disabled=not pode_resgatar):
+                    if resgatar_recompensa(item_id, 'material_escolar'):
+                        st.success(f"✅ {item['nome']} resgatado com sucesso!")
+                        st.balloons()
+                        time.sleep(1)
+                        st.rerun()
+    
+    with tab4:
+        st.markdown("### 📜 Histórico de Resgates")
+        
+        if user_data['recompensas_resgatadas']:
+            # Criar DataFrame
+            df_historico = []
+            for resgate in user_data['recompensas_resgatadas']:
+                df_historico.append({
+                    'Data': datetime.fromisoformat(resgate['timestamp']).strftime('%d/%m/%Y %H:%M'),
+                    'Recompensa': resgate['nome'],
+                    'Categoria': resgate['categoria'].replace('_', ' ').title(),
+                    'Custo': f"🪙 {resgate['custo']}"
+                })
+            
+            df_historico = pd.DataFrame(df_historico)
+            st.dataframe(df_historico, use_container_width=True, hide_index=True)
+            
+            # Total gasto
+            total_gasto = sum(r['custo'] for r in user_data['recompensas_resgatadas'])
+            st.markdown(f"""
+            <div class="glass-card">
+                <h3>Total de EcoMoedas Gastas: 🪙 {total_gasto}</h3>
+                <p>Você já resgatou {len(user_data['recompensas_resgatadas'])} recompensas!</p>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.info("Você ainda não resgatou nenhuma recompensa. Explore a loja!")
+    
+    # Dicas de economia
+    st.markdown("### 💡 Dicas para Ganhar Mais EcoMoedas")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        <div class="glass-card">
+            <h4>🎯 Precisão Alta</h4>
+            <p>Detecções com confiança acima de 90% ganham 20% mais EcoMoedas!</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="glass-card">
+            <h4>🥫 Materiais Raros</h4>
+            <p>Metal e vidro valem mais EcoMoedas por serem mais valiosos!</p>
+        </div>
+        """, unsafe_allow_html=True)
+
 def pagina_mapa():
     """Página com mapa de pontos de coleta"""
     st.markdown("## 🗺️ Pontos de Coleta")
@@ -1205,7 +1960,7 @@ def pagina_mapa():
     """, unsafe_allow_html=True)
     
     # Criar e mostrar mapa
-    mapa = criar_mapa_pontos_coleta(material_selecionado)
+    mapa = criar_mapa_interativo(PONTOS_COLETA[material_selecionado])
     
     if mapa:
         st.pydeck_chart(mapa, use_container_width=True)
@@ -1219,7 +1974,7 @@ def pagina_mapa():
             <div class="glass-card">
                 <h4>{ponto['nome']}</h4>
                 <p>📍 {ponto['cidade']}</p>
-                <p>🗺️ Lat: {ponto['lat']:.4f}, Lng: {ponto['lng']:.4f}</p>
+                <p>🗺️ Lat: {ponto['lat']:.4f}, lon: {ponto['lon']:.4f}</p>
             </div>
             """, unsafe_allow_html=True)
     else:
@@ -1306,7 +2061,6 @@ def pagina_sobre():
 # ================================================
 # 🚀 APLICAÇÃO PRINCIPAL
 # ================================================
-
 def main():
     """Função principal da aplicação"""
     # Carregar CSS
@@ -1330,11 +2084,14 @@ def main():
         pagina_dashboard()
     elif pagina_atual == 'Ranking':
         pagina_ranking()
+    elif pagina_atual == 'Loja': 
+        pagina_recompensas() 
     elif pagina_atual == 'Mapa':
-        pagina_mapa()
+        material = st.selectbox("Selecione o material:", list(CLASS_METADATA.keys()))
+        mostrar_secao_mapa_melhorada(material)
     elif pagina_atual == 'Sobre':
         pagina_sobre()
-    
+  
     # Footer
     st.markdown("---")
     st.markdown("""
